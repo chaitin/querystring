@@ -1,5 +1,6 @@
 export type QueryStringValue = string | null;
-export type QueryStringInputValue = QueryStringValue | undefined | number;
+export type ArrayFormatEncoderInput = QueryStringValue | undefined;
+export type QueryStringInputValue = ArrayFormatEncoderInput | number;
 export interface IParseReturn {
   [key: string]: QueryStringValue | QueryStringValue[];
 }
@@ -32,23 +33,34 @@ export function encodeRFC3986ValueChars(str: string): string {
 
 export function arrayFormatEncoder(
   key: string,
-  value: QueryStringValue
+  value: ArrayFormatEncoderInput
 ): string {
-  return value === null
-    ? encodeRFC3986ValueChars(key)
-    : `${encodeRFC3986ValueChars(key)}=${encodeRFC3986ValueChars(value)}`;
+  const encodedKey = encodeRFC3986ValueChars(key);
+  // Missing `=` should be `null`:
+  // http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+  switch (value) {
+    case null:
+      return encodedKey;
+    case undefined:
+      return `${encodedKey}=`;
+    default:
+      // string
+      return `${encodedKey}=${encodeRFC3986ValueChars(value)}`;
+  }
 }
 
 export function arrayFormatParser(
   key: string,
-  value: string,
+  value: string | null,
   ret: IParseReturn
-): IParseReturn {
+): void {
   if (ret[key] === undefined) {
     ret[key] = value;
-    return;
+  } else if (Array.isArray(ret[key])) {
+    (ret[key] as QueryStringValue[]).push(value);
+  } else {
+    ret[key] = [ret[key] as string, value];
   }
-  ret[key] = [].concat(ret[key], value);
 }
 
 export function parse(input: string): IParseReturn {
@@ -62,9 +74,6 @@ export function parse(input: string): IParseReturn {
 
   for (const param of input.split("&")) {
     const [key, value] = param.replace(/\+/g, " ").split("=");
-
-    // Missing `=` should be `null`:
-    // http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
     arrayFormatParser(
       decodeUriComponent(key),
       value === undefined ? null : decodeUriComponent(value),
