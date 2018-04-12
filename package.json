@@ -1,0 +1,38 @@
+{
+  "name": "@chaitin/querystring",
+  "version": "1.0.0",
+  "description": "Parse and stringify URL query strings",
+  "main": "index.js",
+  "scripts": {
+    "precommit": "lint-staged",
+    "test": "tsc && ava"
+  },
+  "author": "",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chaitin/querystring"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.ts": ["prettier --write", "tslint --fix", "git add"],
+      "*.json": ["prettier --write", "git add"],
+      "**/*.ts": ["prettier --write", "tslint --fix", "git add"]
+    },
+    "concurrent": false
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.4",
+    "prettier": "^1.12.0",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.10.0",
+    "typescript": "^2.8.1"
+  },
+  "dependencies": {}
+}
