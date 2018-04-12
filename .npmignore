@@ -1,0 +1,8 @@
+.travis.yml
+*.map
+.editorconfig
+tslint.json
+tsconfig.json
+test/
+yarn-error.log
+yarn.lock
