@@ -8,5 +8,30 @@ Parse and stringify URL query strings. Forked from [query-string](https://github
 yarn add @chaitin/querystring
 ```
 
+## Usage
+```ts
+import { parse, stringify } from '@chaitin/querystring'
+
+const result = parse("foo=foo&foo&foo=one&foo=&bat=buz")
+// the result is:
+{ bat: "buz", foo: ["foo", null, "one", ""] }
+
+// result is sorted by key
+let qs = stringify({
+  page: "10",
+  pageSize: 200,
+  filter: ["aaa", "bbb", "ccc", 255]
+})
+qs === "filter=aaa&filter=bbb&filter=ccc&filter=255&page=10&pageSize=200"
+
+// and you can disable sorting
+qs = stringify({
+  page: "10",
+  pageSize: 200,
+  filter: ["aaa", "bbb", "ccc", 255]
+}, { sort: false })
+qs === "page=10&pageSize=200&filter=aaa&filter=bbb&filter=ccc&filter=255"
+```
+
 ## License
 MIT
