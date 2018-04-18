@@ -9,9 +9,19 @@ export interface IParseInput {
 }
 
 export interface IStringifyOptions {
+  /**
+   * The name of the function used to determine the order of object keys.
+   * If omitted, the keys are sorted in ascending, ASCII character order.
+   * Pass `false` to disable sorting.
+   */
   sort?: false | ((a: string, b: string) => number);
 }
 
+/**
+ * Gets the unencoded version of an encoded URI component
+ * Returns empty string if input is not valid.
+ * @param {string} encodedURIComponent A value representing an encoded URI component.
+ */
 function decodeUriComponent(input: string) {
   try {
     return decodeURIComponent(input);
@@ -20,6 +30,10 @@ function decodeUriComponent(input: string) {
   }
 }
 
+/**
+ * Encodes a text string as a valid component of a URI respecting RFC3986
+ * @param {string} uriComponent A value representing an encoded URI component.
+ */
 export function encodeRFC3986ValueChars(str: string): string {
   return encodeURIComponent(str).replace(
     /[!'()*]/g,
@@ -63,6 +77,10 @@ export function arrayFormatParser(
   }
 }
 
+/**
+ * Parse a URL query string into a collection of key and value pairs
+ * @param {string} input URL query string
+ */
 export function parse(input: string): IParseReturn {
   const ret: IParseReturn = {};
 
@@ -84,6 +102,11 @@ export function parse(input: string): IParseReturn {
   return ret;
 }
 
+/**
+ * Produces a URL query string from a given obj
+ * @param {IParseInput} obj the object to be stringified
+ * @param {IStringifyOptions} [options] stringify options
+ */
 export function stringify(
   obj?: IParseInput,
   options: IStringifyOptions = {}
