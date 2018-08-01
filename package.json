@@ -13,6 +13,7 @@
   },
   "author": "",
   "license": "MIT",
+  "sideEffects": false,
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
