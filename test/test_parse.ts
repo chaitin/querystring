@@ -1,6 +1,6 @@
 import test from "ava";
 
-import { parse, stringify } from "..";
+import { parse, stringify } from "../src";
 
 test("query strings starting with a `?`", t => {
   t.deepEqual(parse("?foo=bar"), { foo: "bar" });

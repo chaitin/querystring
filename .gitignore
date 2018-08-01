@@ -59,3 +59,6 @@ typings/
 
 *.js
 *.map
+*.d.ts
+dist/
+esm/

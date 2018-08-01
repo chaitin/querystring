@@ -1,6 +1,6 @@
 import test from "ava";
 
-import { stringify } from "..";
+import { stringify } from "../src";
 
 // tslint:disable:object-literal-sort-keys
 

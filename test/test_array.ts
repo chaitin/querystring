@@ -1,6 +1,6 @@
 import test from "ava";
 
-import { arrayFormatEncoder, arrayFormatParser } from "..";
+import { arrayFormatEncoder, arrayFormatParser } from "../src";
 
 test("encode", t => {
   t.is(arrayFormatEncoder("a", null), "a");

@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
+    "declaration": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "lib": ["es2015", "es2015.iterable"],
-    "sourceMap": true
+    "sourceMap": true,
+    "rootDir": ""
   }
 }

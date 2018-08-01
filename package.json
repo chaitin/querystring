@@ -2,9 +2,11 @@
   "name": "@chaitin/querystring",
   "version": "1.0.1",
   "description": "Parse and stringify URL query strings",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "esm/index.js",
   "scripts": {
     "precommit": "lint-staged",
+    "compile": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
     "test": "tsc && ava",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "version": "npm run changelog && git add CHANGELOG.md"
@@ -15,6 +17,7 @@
     "registry": "https://registry.npmjs.org",
     "access": "public"
   },
+  "files": ["dist/", "esm/", "src/"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chaitin/querystring"
