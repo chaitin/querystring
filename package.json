@@ -1,6 +1,6 @@
 {
   "name": "@chaitin/querystring",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Parse and stringify URL query strings",
   "main": "dist/index.js",
   "module": "esm/index.js",
